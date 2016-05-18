@@ -13,9 +13,17 @@ tree = ET.parse(xmlFilePath)
 root = tree.getroot()
 for m in root.iter('Method'):
     methodName = m.find('MethodName').text
+    methodFullName = m.find('MethodFullName').text
     if methodName == functionName:
-        print methodName
-        print "Lines covered:", m.find('LinesCovered').text
-        print "Lines partially covered",m.find('LinesPartiallyCovered').text
-        print "Lines not covered:",m.find('LinesNotCovered').text
+        lineInfoList = [(int(line.find('LnStart').text), int(line.find('Coverage').text)) for line in m.iter('Lines')] 
+        lineCount = int(lineInfoList[-1][0]) - int(lineInfoList[0][0])
+        linesCovered =  m.find('LinesCovered').text
+        linesPartiallyCovered = m.find('LinesPartiallyCovered').text
+        linesUncovered = m.find('LinesNotCovered').text
+        print methodFullName
+        print lineCount
+        print linesCovered
+        print linesPartiallyCovered
+        print linesCovered 
+        print lineInfoList
 
