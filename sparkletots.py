@@ -1,12 +1,13 @@
 import os
 def createHtmlTable(listOfWords,width,height):
-    rows = 6
-    cols = 4
+    rows = len(listOfWords)/2 - 1
+    cols = 2
     print "<table border='1' style='width:100%'>"
     for r in range(rows):  
         print "<tr>"
         for c in range(cols):
-            word = listOfWords[rows*r+c]
+#            print cols*r+c
+            word = listOfWords[cols*r+c]
             print "<th><figure><img src='%s.svg' alt='%s' height='%s' width='%s' align=top><figcaption>%s</figcaption></figure></th>" % (word,word,height,width,word)
         print "</tr>"
     print "</table>"
@@ -19,4 +20,5 @@ for w in words:
 #    print("qr --factory=svg-path %s > %s.svg" % (prefix + w,w))
     pass
 
-print createHtmlTable(words,150,200)
+width = 200
+print createHtmlTable(words,width,width*1.3)
